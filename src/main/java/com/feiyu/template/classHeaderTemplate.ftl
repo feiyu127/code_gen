@@ -1,5 +1,5 @@
 /**
- * ${entityComment!"实体"}
+ * ${tableComment!"实体"}
  * 
  * @see
  * @author 	${author!"作者"}

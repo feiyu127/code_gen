@@ -3,10 +3,6 @@ package com.feiyu.util;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.feiyu.gen.Test;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -14,7 +10,7 @@ import freemarker.template.TemplateException;
 
 public class FreeMarkerUtil
 {
-    private static final String TEMPLATE_DIR_PATH = Test.class.getResource("/").getPath() + "/com/feiyu/template";
+    private static final String TEMPLATE_DIR_PATH = FreeMarkerUtil.class.getResource("/").getPath() + "/com/feiyu/template";
     private static Configuration cfg; // 模版配置对象
     
     static{
@@ -43,7 +39,6 @@ public class FreeMarkerUtil
         }
         catch (TemplateException | IOException e)
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
