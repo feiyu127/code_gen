@@ -53,7 +53,7 @@ public interface BaseParam
     static Object initData(Map<String, String> tableInfo, List<Map<String, String>> columnList)
     {
         Map<String, Object> result = BaseParam.getBaseMap();
-        String tableName = tableInfo.get("TABLE_COMMENT");
+        String tableName = tableInfo.get("TABLE_NAME");
         result.put("tableComment", tableInfo.get("TABLE_COMMENT"));
         result.put("tableName", tableName);
         result.put("className", jdbcUtils.getHumName(tableName, true));
