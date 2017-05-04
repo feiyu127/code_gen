@@ -1,5 +1,5 @@
 <#include "fileHeaderTemplate.ftl">
-package ${packageName}.bean
+package ${packageName}.bean;
 
 import java.io.Serializable;
 
@@ -24,14 +24,14 @@ public class ${className} implements Serializable
      */
     public ${column.javaType} get${column.javaName?cap_first}(){
     	return this.${column.javaName};
-    };
+    }
     
     /**
      * 设置${column.columnComment}
      */
-    public void set${column.javaName?cap_first}(${column.javaType}, ${column.javaName}){
+    public void set${column.javaName?cap_first}(${column.javaType} ${column.javaName}){
     	this.${column.javaName} = ${column.javaName};
-    };
+    }
     
     </#list>
 }

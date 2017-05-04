@@ -1,5 +1,5 @@
 <#include "fileHeaderTemplate.ftl">
-package ${packageName}.dao
+package ${packageName}.dao;
 
 import ${packageName}.bean.${className};
 import ${basePackageName}.dao.BaseMapper;

@@ -1,6 +1,7 @@
 package com.feiyu.util;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
@@ -41,5 +42,31 @@ public class FreeMarkerUtil
         {
             e.printStackTrace();
         }
+    }
+    
+    public static void processFile(String templateFileName, Object dataModel, String filePath){
+        try
+        {
+            File file = createFile(filePath);
+            Template t = cfg.getTemplate(templateFileName);
+            t.process(dataModel, new FileWriter(file));
+        }
+        catch (TemplateException | IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    public static File createFile(String filePath){
+        File file = new File(filePath);
+        if(!file.exists()){
+            File fileDir = file.getParentFile();
+            if (!fileDir.exists())
+            {
+                fileDir.mkdirs();
+            }
+            file = new File(filePath);
+        }
+        return file;
     }
 }

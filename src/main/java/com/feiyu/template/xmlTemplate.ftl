@@ -10,12 +10,30 @@
 	
 	<insert id="saveEntity" parameterType="${className?uncap_first}">
 	INSERT INTO ${tableName}(
-		<#list columnList as column >
+	<#list columnList as column >
 		<#if "PRI" != column.columnKey>
-			${column.columnName}
+		${column.columnName}<#if column_has_next>,</#if>
 		</#if>
-		<${("PRI" == column.columnKey)? string('id','result')} column="${column.columnName}" property="${column.javaName}" />
-		</#list>
+	</#list>
+	) values(
+	<#list columnList as column >
+		<#if "PRI" != column.columnKey>
+		${r'#{'}${column.javaName}}<#if column_has_next>,</#if>
+		</#if>
+	</#list>
 	)
 	</insert>
+	
+	<select id="getEntityByKey" parameterType="${primaryJavaType}" resultMap="${className?uncap_first}ResultMap">
+		SELECT
+		<#list columnList as column >
+		<#if "PRI" != column.columnKey>
+		${column.columnName}<#if column_has_next>,</#if>
+		</#if>
+		</#list>
+		FROM `${tableName}`
+		WHERE ${primaryColumnName} = ${r'#{'}_parameter}
+	</select>
+	
+	
 </mapper>

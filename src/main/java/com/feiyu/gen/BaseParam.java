@@ -20,8 +20,8 @@ public interface BaseParam
     static Map<String, Object> getBaseMap(){
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("author", "nanshouxiao");
-        paramMap.put("packageName", "com.feiyu");
-        paramMap.put("basePackageName", "com.base");
+        paramMap.put("packageName", "com.tickets.sys");
+        paramMap.put("basePackageName", "com.tickets.common");
         
         return paramMap;
     }
@@ -50,7 +50,7 @@ public interface BaseParam
      * @param columnList
      * @return
      */
-    static Object initData(Map<String, String> tableInfo, List<Map<String, String>> columnList)
+    static Map<String, Object> initData(Map<String, String> tableInfo, List<Map<String, String>> columnList)
     {
         Map<String, Object> result = BaseParam.getBaseMap();
         String tableName = tableInfo.get("TABLE_NAME");
