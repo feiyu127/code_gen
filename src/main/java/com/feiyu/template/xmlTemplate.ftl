@@ -11,13 +11,13 @@
 	<insert id="saveEntity" parameterType="${className?uncap_first}">
 	INSERT INTO ${tableName}(
 	<#list columnList as column >
-		<#if "PRI" != column.columnKey>
+		<#if "PRI" != column.columnKey || "auto_increment" != column.extra>
 		${column.columnName}<#if column_has_next>,</#if>
 		</#if>
 	</#list>
 	) values(
 	<#list columnList as column >
-		<#if "PRI" != column.columnKey>
+		<#if "PRI" != column.columnKey || "auto_increment" != column.extra>
 		${r'#{'}${column.javaName}}<#if column_has_next>,</#if>
 		</#if>
 	</#list>
@@ -27,7 +27,7 @@
 	<select id="getEntityByKey" parameterType="${primaryJavaType}" resultMap="${className?uncap_first}ResultMap">
 		SELECT
 		<#list columnList as column >
-		<#if "PRI" != column.columnKey>
+		<#if "PRI" != column.columnKey || "auto_increment" != column.extra>
 		${column.columnName}<#if column_has_next>,</#if>
 		</#if>
 		</#list>
