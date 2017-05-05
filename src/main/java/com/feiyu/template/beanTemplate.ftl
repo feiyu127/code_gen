@@ -34,4 +34,14 @@ public class ${className} implements Serializable
     }
     
     </#list>
+    
+    @Override
+    public String toString()
+    {
+        return new StringBuilder(super.toString()).append("[")
+        <#list columnList as column>
+	      .append("${column.javaName}=").append(get${column.javaName?cap_first}())<#if column_has_next>.append(", ")</#if>
+	    </#list>
+	      .append("]").toString();
+    }
 }

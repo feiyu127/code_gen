@@ -20,9 +20,6 @@ public interface BaseParam
     static Map<String, Object> getBaseMap(){
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("author", "nanshouxiao");
-        paramMap.put("packageName", "com.tickets.sys");
-        paramMap.put("basePackageName", "com.tickets.common");
-        
         return paramMap;
     }
     
@@ -66,6 +63,7 @@ public interface BaseParam
             result.put("primaryColumnName", column.get("COLUMN_NAME"));
             result.put("primaryJavaName", jdbcUtils.getHumName(column.get("COLUMN_NAME")));
             result.put("primaryDataType", column.get("DATA_TYPE"));
+            result.put("primaryExtra", column.get("EXTRA"));
             result.put("primaryJavaType", Optional.ofNullable(jdbcToJavaTypeMap.get(column.get("DATA_TYPE"))).orElse("Object"));
         });
         return result;
@@ -76,6 +74,7 @@ public interface BaseParam
         String columnName = column.get("COLUMN_NAME");
         String javaName = jdbcUtils.getHumName(columnName);
 
+        resultColumn.put("extra", column.get("EXTRA"));
         resultColumn.put("columnKey", column.get("COLUMN_KEY"));
         resultColumn.put("columnName", columnName);
         resultColumn.put("javaName", javaName);
