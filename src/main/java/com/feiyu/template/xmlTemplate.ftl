@@ -8,7 +8,7 @@
 		</#list>
 	</resultMap>
 	
-	<insert id="saveEntity" parameterType="${className?uncap_first}">
+	<insert id="saveEntity" parameterType="${className?uncap_first}" <#if "auto_increment" == primaryExtra >keyProperty="${primaryJavaName}" useGeneratedKeys="true"</#if>>
 	INSERT INTO ${tableName}(
 	<#list columnList as column >
 		<#if "PRI" != column.columnKey || "auto_increment" != column.extra>
@@ -23,6 +23,26 @@
 	</#list>
 	)
 	</insert>
+	
+	<insert id="batchSaveEntity" <#if "auto_increment" == primaryExtra >keyProperty="${primaryJavaName}" useGeneratedKeys="true"</#if>>
+	INSERT INTO ${tableName}(
+	<#list columnList as column >
+		<#if "PRI" != column.columnKey || "auto_increment" != column.extra>
+		${column.columnName}<#if column_has_next>,</#if>
+		</#if>
+	</#list>
+	) values
+	<foreach collection="list" item="item" separator=",">
+	(
+	<#list columnList as column >
+		<#if "PRI" != column.columnKey || "auto_increment" != column.extra>
+		${r'#{'}item.${column.javaName}}<#if column_has_next>,</#if>
+		</#if>
+	</#list>
+	)
+	</foreach>
+	</insert>
+	
 	
 	<select id="getEntityByKey" parameterType="${primaryJavaType}" resultMap="${className?uncap_first}ResultMap">
 		SELECT
