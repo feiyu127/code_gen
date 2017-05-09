@@ -5,7 +5,7 @@ import ${packageName}.bean.${className};
 import ${basePackageName}.service.BaseService;
 
 <#include "classHeaderTemplate.ftl">
-public interface ${className}Service extends BaseService<${className}>
+public interface ${className}Service extends BaseService<${className}, ${primaryJavaType}>
 {
 
 }

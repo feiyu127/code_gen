@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 <#include "classHeaderTemplate.ftl">
 @Service("${className?uncap_first}ServiceImpl")
-public class ${className}ServiceImpl extends BaseServiceImpl<${className}> implements ${className}Service
+public class ${className}ServiceImpl extends BaseServiceImpl<${className}, ${primaryJavaType}> implements ${className}Service
 {
 
 }
