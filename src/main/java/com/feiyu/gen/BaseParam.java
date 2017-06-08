@@ -3,7 +3,6 @@ package com.feiyu.gen;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.feiyu.util.jdbcUtils;
@@ -64,7 +63,7 @@ public interface BaseParam
             result.put("primaryJavaName", jdbcUtils.getHumName(column.get("COLUMN_NAME")));
             result.put("primaryDataType", column.get("DATA_TYPE"));
             result.put("primaryExtra", column.get("EXTRA"));
-            result.put("primaryJavaType", Optional.ofNullable(jdbcToJavaTypeMap.get(column.get("DATA_TYPE"))).orElse("Object"));
+            result.put("primaryJavaType", jdbcToJavaTypeMap.getOrDefault(column.get("DATA_TYPE"), "Object"));
         });
         return result;
     }
@@ -80,7 +79,7 @@ public interface BaseParam
         resultColumn.put("javaName", javaName);
         resultColumn.put("columnComment", column.get("COLUMN_COMMENT"));
         String dataType = column.get("DATA_TYPE");
-        resultColumn.put("javaType", Optional.ofNullable(jdbcToJavaTypeMap.get(dataType)).orElse("Object"));
+        resultColumn.put("javaType", jdbcToJavaTypeMap.getOrDefault(dataType, "Object"));
 
         return resultColumn;
         
